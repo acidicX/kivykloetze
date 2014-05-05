@@ -1,15 +1,17 @@
-''' -------------------------------------
+''' ---------------------------------------
     KivyKloetze
     by Carsten Meier and Sina Busch
-    -------------------------------------
+    ---------------------------------------
+    https://github.com/acidicX/kivykloetze
+    ---------------------------------------
     A small game for small children
-    -------------------------------------
+    ---------------------------------------
     Licensed under GPL v3
     https://www.gnu.org/licenses/gpl.html
-    -------------------------------------
+    ---------------------------------------
     Please read the README.md file for
     instructions.
-    ------------------------------------- '''
+    --------------------------------------- '''
 
 from kivy.app import App
 from kivy.uix.widget import Widget
@@ -22,9 +24,9 @@ from kivy.clock import Clock
 from kivy.animation import Animation
 from kivy.config import Config
 
-''' -------------------------------------
+''' ---------------------------------------
     Global variables
-    ------------------------------------- '''
+    --------------------------------------- '''
 
 # global game object, "controller"
 game = 0
@@ -36,13 +38,13 @@ parts = 0
 partsArray = [5, 4]
 
 
-''' -------------------------------------
+''' ---------------------------------------
     Shape
-    -------------------------------------
+    ---------------------------------------
     Class for all shapes, heir of Widget,
     contains most of the methods
     for level-based logic ("model")
-    ------------------------------------- '''
+    --------------------------------------- '''
 
   
 class Shape(Widget):
@@ -138,12 +140,12 @@ class Shape(Widget):
         game.puzzlePartDone()
 
 
-''' -------------------------------------
+''' ---------------------------------------
     < SHAPES >
-    -------------------------------------
+    ---------------------------------------
     All used shapes are defined here,
     but drawn in main kv file
-    ------------------------------------- '''
+    --------------------------------------- '''
 
 
 # Circle mask, drawn by kv
@@ -201,15 +203,15 @@ class ShapePolygonTool(Shape):
         self.size = (Window.height * 0.2, Window.height * 0.2)
 
   
-''' -------------------------------------
+''' ---------------------------------------
     </ SHAPES >
-    ------------------------------------- 
+    --------------------------------------- 
     
-    -------------------------------------
+    ---------------------------------------
     < ALL OTHER OBJECTS WITH GRAPHICS >
-    -------------------------------------
+    ---------------------------------------
     Also drawn in main kv file
-    ------------------------------------- '''
+    --------------------------------------- '''
 
 
 # All levels are LevelObjects, defined in kv
@@ -237,17 +239,17 @@ class ToolBoxBar(Widget):
         super(ToolBoxBar, self).__init__(**kwargs)
         self.size = Window.size
         
-''' -------------------------------------
+''' ---------------------------------------
     </ ALL OTHER OBJECTS WITH GRAPHICS >
-    -------------------------------------
+    ---------------------------------------
 
     ------------------------------------
     KivyKloetze
-    -------------------------------------
+    ---------------------------------------
     Root canvas widget for the game,
     contains most of game logic
     (level loading, etc.)
-    ------------------------------------- '''
+    --------------------------------------- '''
 
 
 class KivyKloetze(Widget):
