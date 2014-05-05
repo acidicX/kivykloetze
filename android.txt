@@ -1,0 +1,3 @@
+title=KivyKlötze
+author=Carsten Meier, Sina Busch
+orientation=landscape

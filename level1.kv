@@ -1,0 +1,75 @@
+#:kivy 1.8
+
+<LevelObject>:
+    canvas:
+        Rectangle:
+            size: self.size
+            source: 'img/bg.png'
+    ToolBoxBar:
+    ShapeCircle:
+        id: shape_circle_mask1
+        shapeId: 'circle'
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.8, root.height * 0.6
+    ShapeQuad:
+        id: shape_quad_mask1
+        shapeId: 'quad'
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.6, root.height * 0.8
+    ShapeQuad:
+        id: shape_quad_mask2
+        shapeId: 'quad'
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.3, root.height * 0.5
+    ShapeTriangle:
+        id: shape_triangle_mask1
+        shapeId: 'triangle'
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.1, root.height * 0.7
+    ShapePolygon:
+        id: shape_polygon_mask1
+        shapeId: 'polygon'
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.6, root.height * 0.5
+    ShapeCircleTool:
+        id: shape_circle_tool1
+        shapeId: 'circle'
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeCenter: 0 + root.width * 0.2, root.height * 0.15
+        center: 0 + root.width * 0.2, root.height * 0.15
+    ShapeQuadTool:
+        id: shape_quad_tool2
+        shapeId: 'quad'
+        shapeIsActive: False
+        shapeIsTool: True
+        shapeToolNo: 2
+        shapeCenter: 0 + root.width * 0.4, root.height * 0.15
+        center: 0 + root.width * 0.4, root.height * 0.15
+    ShapeQuadTool:
+        id: shape_quad_tool1
+        shapeId: 'quad'
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeToolNo: 1
+        shapeCenter: 0 + root.width * 0.4, root.height * 0.15
+        center: 0 + root.width * 0.4, root.height * 0.15
+    ShapeTriangleTool:
+        id: shape_triangle_tool1
+        shapeId: 'triangle'
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeCenter: 0 + root.width * 0.6, root.height * 0.15
+        center: 0 + root.width * 0.6, root.height * 0.15
+    ShapePolygonTool:
+        id: shape_polygon_tool1
+        shapeId: 'polygon'
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeCenter: 0 + root.width * 0.8, root.height * 0.15
+        center: 0 + root.width * 0.8, root.height * 0.15
