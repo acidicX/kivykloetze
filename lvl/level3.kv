@@ -1,0 +1,150 @@
+#:kivy 1.8
+
+<ShapeOne>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/mask_blatt2.png'
+            
+<ShapeTwo>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/mask_blume1.png'
+
+<ShapeThree>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/mask_blume2.png'
+            
+<ShapeFour>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/mask_blatt1.png'
+
+<ShapeOneTool>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/tool_blatt2.png'
+
+<ShapeTwoTool>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/tool_blume1.png'
+
+<ShapeThreeTool>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/tool_blume2.png'
+
+<ShapeFourTool>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/3/tool_blatt1.png'
+
+<LevelObject>:
+    canvas:
+        Rectangle:
+            size: self.size
+            source: 'img/3/bg.jpg'
+    ToolBoxBar:
+    ShapeOne:
+        shapeId: 1
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.2, root.height * 0.5
+    ShapeTwo:
+        shapeId: 2
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.3, root.height * 0.7
+    ShapeFour:
+        shapeId: 4
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.4, root.height * 0.5
+    ShapeOne:
+        shapeId: 1
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.6, root.height * 0.6
+    ShapeThree:
+        shapeId: 3
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.7, root.height * 0.8
+    ShapeFour:
+        shapeId: 4
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.8, root.height * 0.6
+    ShapeOneTool:
+        shapeId: 1
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeToolNo: 1
+        shapeCenter: 0 + root.width * 0.2, root.height * 0.15
+        center: 0 + root.width * 0.2, root.height * 0.15
+    ShapeOneTool:
+        shapeId: 1
+        shapeIsActive: False
+        shapeIsTool: True
+        shapeToolNo: 2
+        shapeCenter: 0 + root.width * 0.2, root.height * 0.15
+        center: 0 + root.width * 0.2, root.height * 0.15
+    ShapeTwoTool:
+        shapeId: 2
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeCenter: 0 + root.width * 0.4, root.height * 0.15
+        center: 0 + root.width * 0.4, root.height * 0.15
+    ShapeThreeTool:
+        shapeId: 3
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeCenter: 0 + root.width * 0.6, root.height * 0.15
+        center: 0 + root.width * 0.6, root.height * 0.15
+    ShapeFourTool:
+        shapeId: 4
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeToolNo: 1
+        shapeCenter: 0 + root.width * 0.8, root.height * 0.15
+        center: 0 + root.width * 0.8, root.height * 0.15
+    ShapeFourTool:
+        shapeId: 4
+        shapeIsActive: False
+        shapeIsTool: True
+        shapeToolNo: 2
+        shapeCenter: 0 + root.width * 0.8, root.height * 0.15
+        center: 0 + root.width * 0.8, root.height * 0.15

@@ -1,0 +1,66 @@
+#:kivy 1.8
+
+<ShapeOne>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/1/mask_haus1.png'
+            
+<ShapeTwo>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/1/mask_haus2.png'
+
+<ShapeOneTool>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/1/tool_haus1.png'
+
+<ShapeTwoTool>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/1/tool_haus2.png'
+
+<LevelObject>:
+    canvas:
+        Rectangle:
+            size: self.size
+            source: 'img/1/bg.jpg'
+    ToolBoxBar:
+    ShapeOne:
+        shapeId: 1
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.7, root.height * 0.7
+    ShapeTwo:
+        shapeId: 2
+        shapeIsActive: True
+        shapeIsTool: False
+        center: 0 + root.width * 0.7, root.height * 0.5
+    ShapeOneTool:
+        shapeId: 1
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeCenter: 0 + root.width * 0.4, root.height * 0.15
+        center: 0 + root.width * 0.4, root.height * 0.15
+    ShapeTwoTool:
+        shapeId: 2
+        shapeIsActive: True
+        shapeIsTool: True
+        shapeCenter: 0 + root.width * 0.7, root.height * 0.15
+        center: 0 + root.width * 0.7, root.height * 0.15

@@ -13,16 +13,17 @@
     instructions.
     --------------------------------------- '''
 
+from kivy.animation import Animation
 from kivy.app import App
+from kivy.clock import Clock
+from kivy.config import Config
+from kivy.core.window import Window
+from kivy.core.audio import SoundLoader
+from kivy.graphics import Color, Ellipse, Rectangle
+from kivy.lang import Builder
+from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, ReferenceListProperty, NumericProperty
 from kivy.uix.widget import Widget
 from kivy.vector import Vector
-from kivy.graphics import Color, Ellipse, Rectangle
-from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, ReferenceListProperty, NumericProperty
-from kivy.lang import Builder
-from kivy.core.window import Window
-from kivy.clock import Clock
-from kivy.animation import Animation
-from kivy.config import Config
 
 ''' ---------------------------------------
     Global variables
@@ -35,7 +36,7 @@ level = 0
 # puzze parts to solve in current level
 parts = 0
 # parts in all levels (also defines maximum level count)
-partsArray = [5, 4]
+partsArray = [2, 5, 6, 6]
 
 
 ''' ---------------------------------------
@@ -46,10 +47,12 @@ partsArray = [5, 4]
     for level-based logic ("model")
     --------------------------------------- '''
 
-  
+
 class Shape(Widget):
     def __init__(self, **kwargs):
         super(Shape, self).__init__(**kwargs)
+        # set size
+        self.size = (Window.height * 0.2, Window.height * 0.2)
         # shapeId can be: circle, quad, ...
         shapeId = StringProperty(None)
         # defines if shape is currently active
@@ -60,6 +63,9 @@ class Shape(Widget):
         shapeToolNo = NumericProperty(None)
         # if tool, save default shape center
         shapeCenter = ReferenceListProperty(None)
+
+    # move selector on_touch_down TODO
+    #def on_touch_up(self, touch):
 
     # move stuff around on canvas
     def on_touch_move(self, touch):
@@ -143,74 +149,90 @@ class Shape(Widget):
 ''' ---------------------------------------
     < SHAPES >
     ---------------------------------------
-    All used shapes are defined here,
-    but drawn in main kv file
+    All four shapes are defined here,
+    but drawn in <lvl/level#.kv> file
     --------------------------------------- '''
 
 
-# Circle mask, drawn by kv
-class ShapeCircle(Shape):
+# First mask, drawn by kv
+class ShapeOne(Shape):
     def __init__(self, **kwargs):
-        super(ShapeCircle, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
+        super(ShapeOne, self).__init__(**kwargs)
 
 
-# Circle tool, drawn by kv
-class ShapeCircleTool(Shape):
+# First tool, drawn by kv
+class ShapeOneTool(Shape):
     def __init__(self, **kwargs):
-        super(ShapeCircleTool, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
+        super(ShapeOneTool, self).__init__(**kwargs)
 
 
-# Quad mask, drawn by kv
-class ShapeQuad(Shape):
+# Second mask, drawn by kv
+class ShapeTwo(Shape):
     def __init__(self, **kwargs):
-        super(ShapeQuad, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
+        super(ShapeTwo, self).__init__(**kwargs)
 
 
-# Quad tool, drawn by kv
-class ShapeQuadTool(Shape):
+# Second tool, drawn by kv
+class ShapeTwoTool(Shape):
     def __init__(self, **kwargs):
-        super(ShapeQuadTool, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
-        
-# Triangle mask, drawn by kv
-class ShapeTriangle(Shape):
+        super(ShapeTwoTool, self).__init__(**kwargs)
+
+
+# Third mask, drawn by kv
+class ShapeThree(Shape):
     def __init__(self, **kwargs):
-        super(ShapeTriangle, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
+        super(ShapeThree, self).__init__(**kwargs)
 
 
-# Triangle tool, drawn by kv
-class ShapeTriangleTool(Shape):
+# Third tool, drawn by kv
+class ShapeThreeTool(Shape):
     def __init__(self, **kwargs):
-        super(ShapeTriangleTool, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
+        super(ShapeThreeTool, self).__init__(**kwargs)
 
 
-# Triangle mask, drawn by kv
-class ShapePolygon(Shape):
+# Fourth mask, drawn by kv
+class ShapeFour(Shape):
     def __init__(self, **kwargs):
-        super(ShapePolygon, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
+        super(ShapeFour, self).__init__(**kwargs)
 
 
-# Triangle tool, drawn by kv
-class ShapePolygonTool(Shape):
+# Fourth tool, drawn by kv
+class ShapeFourTool(Shape):
     def __init__(self, **kwargs):
-        super(ShapePolygonTool, self).__init__(**kwargs)
-        self.size = (Window.height * 0.2, Window.height * 0.2)
+        super(ShapeFourTool, self).__init__(**kwargs)
 
-  
+
+# Fifth mask, drawn by kv
+class ShapeFive(Shape):
+    def __init__(self, **kwargs):
+        super(ShapeFive, self).__init__(**kwargs)
+
+
+# Fifth tool, drawn by kv
+class ShapeFiveTool(Shape):
+    def __init__(self, **kwargs):
+        super(ShapeFiveTool, self).__init__(**kwargs)
+
+
+# Sixth mask, drawn by kv
+class ShapeSix(Shape):
+    def __init__(self, **kwargs):
+        super(ShapeSix, self).__init__(**kwargs)
+
+
+# Sixth tool, drawn by kv
+class ShapeSixTool(Shape):
+    def __init__(self, **kwargs):
+        super(ShapeSixTool, self).__init__(**kwargs)
+
 ''' ---------------------------------------
     </ SHAPES >
     --------------------------------------- 
-    
+
     ---------------------------------------
     < ALL OTHER OBJECTS WITH GRAPHICS >
     ---------------------------------------
-    Also drawn in main kv file
+    Drawn in <kivykloetze.kv> file
     --------------------------------------- '''
 
 
@@ -238,7 +260,7 @@ class ToolBoxBar(Widget):
     def __init__(self, **kwargs):
         super(ToolBoxBar, self).__init__(**kwargs)
         self.size = Window.size
-        
+
 ''' ---------------------------------------
     </ ALL OTHER OBJECTS WITH GRAPHICS >
     ---------------------------------------
@@ -247,8 +269,8 @@ class ToolBoxBar(Widget):
     KivyKloetze
     ---------------------------------------
     Root canvas widget for the game,
-    contains most of game logic
-    (level loading, etc.)
+    contains most of game logic -
+    level loading, etc. ("controller")
     --------------------------------------- '''
 
 
@@ -270,6 +292,11 @@ class KivyKloetze(Widget):
     def nextLevel(self):
         global level
         if level is not 0 and level < partsArray.__len__():
+            # play level sound
+            levelUpSound = SoundLoader.load('snd/' + str(level) + '.ogg')
+            if levelUpSound:
+                print("Sound found at %s" % levelUpSound.source)
+                levelUpSound.play()
             # print level up message
             self.levelUpMessage = LevelUpMessage()
             game.parent.add_widget(self.levelUpMessage)
@@ -279,6 +306,7 @@ class KivyKloetze(Widget):
             Clock.schedule_once(lambda dt: levelUpAni2.start(self.levelUpMessage), 4)
             # load next file in 5 seconds
             Clock.schedule_once(lambda dt: game.loadNextLevel(), 5)
+            Clock.schedule_once(lambda dt: levelUpSound.stop(), 5)
         if level == 0:
             # app start
             game.loadNextLevel()
@@ -292,7 +320,7 @@ class KivyKloetze(Widget):
             Clock.schedule_once(lambda dt: gf2.start(self.gameFinishedMessage), 4)
             # load next file in 5 seconds
             Clock.schedule_once(lambda dt: game.loadNextLevel(), 5)
-            Builder.unload_file('level'+str(level)+'.kv')
+            Builder.unload_file('lvl/level'+str(level)+'.kv')
             level = 0
 
     def loadNextLevel(self):
@@ -303,14 +331,14 @@ class KivyKloetze(Widget):
             # remove old level
             game.remove_widget(self.levelObject)
             # unload old level file
-            Builder.unload_file('level'+str(level)+'.kv')
+            Builder.unload_file('lvl/level'+str(level)+'.kv')
 
         # increment level
         level += 1
         print('KivyKloetze::loadNextLevel::loading', level)
 
         # load new level file
-        Builder.load_file('level'+str(level)+'.kv')
+        Builder.load_file('lvl/level'+str(level)+'.kv')
         Builder.sync()
 
         # add new level object to game stage
