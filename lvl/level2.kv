@@ -7,7 +7,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'img/2/mask_circle.png'
+            source: 'img/2/mask_schiff1.png'
             
 <ShapeTwo>:
     canvas:
@@ -16,7 +16,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'img/2/mask_square.png'
+            source: 'img/2/mask_schiff2.png'
 
 <ShapeThree>:
     canvas:
@@ -25,16 +25,8 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'img/2/mask_triangle.png'
+            source: 'img/2/mask_schiff3.png'
             
-<ShapeFour>:
-    canvas:
-        Color:
-            rgb: 1, 1, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'img/2/mask_polygon.png'
 
 <ShapeOneTool>:
     canvas:
@@ -43,7 +35,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'img/2/tool_circle.png'
+            source: 'img/2/tool_schiff1.png'
 
 <ShapeTwoTool>:
     canvas:
@@ -52,7 +44,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'img/2/tool_square.png'
+            source: 'img/2/tool_schiff2.png'
 
 <ShapeThreeTool>:
     canvas:
@@ -61,16 +53,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'img/2/tool_triangle.png'
-
-<ShapeFourTool>:
-    canvas:
-        Color:
-            rgb: 1, 1, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'img/2/tool_polygon.png'
+            source: 'img/2/tool_schiff3.png'
 
 <LevelObject>:
     canvas:
@@ -78,49 +61,33 @@
             size: self.size
             source: 'img/2/bg.jpg'
     ToolBoxBar:
+        isToolBoxBar: True
     ShapeOne:
         shapeId: 1
         shapeIsActive: True
         shapeIsTool: False
-        center: 0 + root.width * 0.2, root.height * 0.8
+        center: 0 + root.width * 0.3, root.height * 0.85
     ShapeTwo:
         shapeId: 2
         shapeIsActive: True
         shapeIsTool: False
-        center: 0 + root.width * 0.6, root.height * 0.5
-    ShapeOne:
-        shapeId: 1
-        shapeIsActive: True
-        shapeIsTool: False
-        center: 0 + root.width * 0.9, root.height * 0.5
+        center: 0 + root.width * 0.3, root.height * 0.65
     ShapeThree:
         shapeId: 3
         shapeIsActive: True
         shapeIsTool: False
-        center: 0 + root.width * 0.7, root.height * 0.85
-    ShapeFour:
-        shapeId: 4
-        shapeIsActive: True
-        shapeIsTool: False
-        center: 0 + root.width * 0.4, root.height * 0.6
-    ShapeOneTool:
-        shapeId: 1
-        shapeIsActive: False
-        shapeIsTool: True
-        shapeToolNo: 2
-        shapeCenter: 0 + root.width * 0.2, root.height * 0.15
-        center: 0 + root.width * 0.2, root.height * 0.15
+        center: 0 + root.width * 0.3, root.height * 0.45
     ShapeOneTool:
         shapeId: 1
         shapeIsActive: True
         shapeIsTool: True
-        shapeToolNo: 1
         shapeCenter: 0 + root.width * 0.2, root.height * 0.15
         center: 0 + root.width * 0.2, root.height * 0.15
     ShapeTwoTool:
         shapeId: 2
         shapeIsActive: True
         shapeIsTool: True
+        shapeToolNo: 2
         shapeCenter: 0 + root.width * 0.4, root.height * 0.15
         center: 0 + root.width * 0.4, root.height * 0.15
     ShapeThreeTool:
@@ -129,10 +96,15 @@
         shapeIsTool: True
         shapeCenter: 0 + root.width * 0.6, root.height * 0.15
         center: 0 + root.width * 0.6, root.height * 0.15
-    ShapeFourTool:
-        shapeId: 4
-        shapeIsActive: True
-        shapeIsTool: True
-        shapeToolNo: 1
-        shapeCenter: 0 + root.width * 0.8, root.height * 0.15
-        center: 0 + root.width * 0.8, root.height * 0.15
+    LevelUpGimmick:
+        size: root.height * 0.2, root.height * 0.2
+        center: 0 + root.width * 0.6, root.height * 0.7
+        opacity: 0
+        isGimmick: True
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'img/2/ufo.png'

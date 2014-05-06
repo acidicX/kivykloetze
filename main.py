@@ -36,7 +36,11 @@ level = 0
 # puzze parts to solve in current level
 parts = 0
 # parts in all levels (also defines maximum level count)
-partsArray = [2, 5, 6, 6]
+partsArray = [2, 3, 5, 6, 6]
+# contains reference for shape function on_touch_move
+selectedElement = 0
+# contains reference for level up gimmick
+levelUpGimmick = 0
 
 
 ''' ---------------------------------------
@@ -65,20 +69,28 @@ class Shape(Widget):
         shapeCenter = ReferenceListProperty(None)
 
     # move selector on_touch_down TODO
-    #def on_touch_up(self, touch):
-
-    # move stuff around on canvas
-    def on_touch_move(self, touch):
-        #print ('Shape::on_touch_move', self.shapeId, self.x, self.y, touch.x, touch.y)
-        # is it defined as a tool (draggable element)?
+    def on_touch_down(self, touch):
+        global selectedElement
+        # is it defined as an active tool (draggable element)?
         if self.shapeIsTool and self.shapeIsActive:
             # if yes, check if mouse inside element
             if self.collide_point(touch.x, touch.y):
-                #print ('Shape::touch inside circle, move')
-                self.center = (touch.x, touch.y)
+                # if yes, set reference for on_touch_move
+                selectedElement = self
+
+    # move stuff around on canvas
+    def on_touch_move(self, touch):
+        # if an element reference has been set
+        if selectedElement:
+            # move element on canvas to touch coordinates
+            selectedElement.center = (touch.x, touch.y)
 
     # collision check on_touch_up
     def on_touch_up(self, touch):
+        global selectedElement
+        # delete reference for on_touch_move
+        selectedElement = 0
+
         # only check tools, not masks
         if self.shapeIsTool and self.shapeIsActive:
             # array of masks
@@ -227,12 +239,13 @@ class ShapeSixTool(Shape):
 
 ''' ---------------------------------------
     </ SHAPES >
-    --------------------------------------- 
+    ---------------------------------------
 
     ---------------------------------------
     < ALL OTHER OBJECTS WITH GRAPHICS >
     ---------------------------------------
-    Drawn in <kivykloetze.kv> file
+    Drawn in <kivykloetze.kv> and/or
+    <lvl/level#.kv> file
     --------------------------------------- '''
 
 
@@ -243,12 +256,21 @@ class LevelObject(Widget):
         self.size = Window.size
 
 
-# LevelUpMessage, defined in kv
-class LevelUpMessage(Widget):
+# SplashScreen, defined in kv
+class SplashScreen(Widget):
     def __init__(self, **kwargs):
-        super(LevelUpMessage, self).__init__(**kwargs)
+        super(SplashScreen, self).__init__(**kwargs)
+        self.size = Window.size
 
- 
+
+# All levels are LevelObjects, defined in kv
+class LevelUpGimmick(Widget):
+    def __init__(self, **kwargs):
+        super(LevelUpGimmick, self).__init__(**kwargs)
+        # indicator for level up gimmick
+        isGimmick = BooleanProperty(None)
+
+
 # GameFinishedMessage, defined in kv
 class GameFinishedMessage(Widget):
     def __init__(self, **kwargs):
@@ -260,6 +282,8 @@ class ToolBoxBar(Widget):
     def __init__(self, **kwargs):
         super(ToolBoxBar, self).__init__(**kwargs)
         self.size = Window.size
+        # indicator for toolboxbar
+        isToolBoxBar = BooleanProperty(None)
 
 ''' ---------------------------------------
     </ ALL OTHER OBJECTS WITH GRAPHICS >
@@ -292,42 +316,62 @@ class KivyKloetze(Widget):
     def nextLevel(self):
         global level
         if level is not 0 and level < partsArray.__len__():
-            # play level sound
-            levelUpSound = SoundLoader.load('snd/' + str(level) + '.ogg')
-            if levelUpSound:
-                print("Sound found at %s" % levelUpSound.source)
-                levelUpSound.play()
-            # print level up message
-            self.levelUpMessage = LevelUpMessage()
-            game.parent.add_widget(self.levelUpMessage)
-            levelUpAni1 = Animation(opacity=1, duration=1)
-            levelUpAni2 = Animation(opacity=0, duration=1)
-            levelUpAni1.start(self.levelUpMessage)
-            Clock.schedule_once(lambda dt: levelUpAni2.start(self.levelUpMessage), 4)
+            self.levelUp()
             # load next file in 5 seconds
             Clock.schedule_once(lambda dt: game.loadNextLevel(), 5)
-            Clock.schedule_once(lambda dt: levelUpSound.stop(), 5)
+
         if level == 0:
-            # app start
-            game.loadNextLevel()
+            # app start, show splash screen
+            self.splashScreen = SplashScreen()
+            game.add_widget(self.splashScreen)
+            splashAni1 = Animation(opacity=1, duration=1)
+            splashAni1.start(self.splashScreen)
+            splashAni2 = Animation(opacity=0, duration=1)
+            Clock.schedule_once(lambda dt: splashAni2.start(self.splashScreen), 6)
+            Clock.schedule_once(lambda dt: game.remove_widget(self.splashScreen), 7)
+            # load first level in 5s
+            Clock.schedule_once(lambda dt: game.loadNextLevel(), 7)
+
         if level == partsArray.__len__():
+            self.levelUp()
             # show game finished message and restart in 5 seconds
             self.gameFinishedMessage = GameFinishedMessage()
             game.parent.add_widget(self.gameFinishedMessage)
             gf1 = Animation(opacity=1, duration=1)
             gf2 = Animation(opacity=0, duration=1)
             gf1.start(self.gameFinishedMessage)
-            Clock.schedule_once(lambda dt: gf2.start(self.gameFinishedMessage), 4)
+            Clock.schedule_once(lambda dt: gf2.start(self.gameFinishedMessage), 10)
             # load next file in 5 seconds
-            Clock.schedule_once(lambda dt: game.loadNextLevel(), 5)
+            Clock.schedule_once(lambda dt: game.loadNextLevel(), 11)
             Builder.unload_file('lvl/level'+str(level)+'.kv')
             level = 0
+
+    def levelUp(self):
+        # hide ToolBoxBar
+        for c in self.levelObject.children:
+            # filter - only toolboxbar
+            if hasattr(c, 'isToolBoxBar'):
+                # fade in
+                hideToolBoxBarAni = Animation(opacity=0, duration=1)
+                hideToolBoxBarAni.start(c)
+
+        # play level sound
+        levelUpSound = SoundLoader.load('snd/' + str(level) + '.ogg')
+        if levelUpSound:
+            print("KivyKloetze::playLevelUpSound::play sound %s" % levelUpSound.source)
+            levelUpSound.play()
+
+        # show level up gimmicks
+        for c in self.levelObject.children:
+            # filter - only gimmicks
+            if hasattr(c, 'isGimmick'):
+                # fade in
+                levelUpGimmickAni = Animation(opacity=1, duration=1)
+                levelUpGimmickAni.start(c)
 
     def loadNextLevel(self):
         global level, parts
         if level is not 0:
-            # remove levelUpMessage again
-            game.parent.remove_widget(self.levelUpMessage)
             # remove old level
             game.remove_widget(self.levelObject)
             # unload old level file
