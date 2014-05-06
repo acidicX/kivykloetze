@@ -143,7 +143,7 @@ class Shape(Widget):
                 for c in self.parent.children:
                     # filter - only shape elements!
                     if hasattr(c, 'shapeToolNo'):
-                        # we only want inactive tools with the same shapeId as our tool
+                        # we only want inactive tools with the same shapeId as our tool that are next in the stack
                         if c.shapeIsActive is False and c.shapeId == self.shapeId:
                             # we also only want the next element!
                             if c.shapeToolNo == self.shapeToolNo + 1:
@@ -329,7 +329,7 @@ class KivyKloetze(Widget):
             splashAni2 = Animation(opacity=0, duration=1)
             Clock.schedule_once(lambda dt: splashAni2.start(self.splashScreen), 6)
             Clock.schedule_once(lambda dt: game.remove_widget(self.splashScreen), 7)
-            # load first level in 5s
+            # load first level in 7s
             Clock.schedule_once(lambda dt: game.loadNextLevel(), 7)
 
         if level == partsArray.__len__():
@@ -346,6 +346,7 @@ class KivyKloetze(Widget):
             Builder.unload_file('lvl/level'+str(level)+'.kv')
             level = 0
 
+    # generic level up executions
     def levelUp(self):
         # hide ToolBoxBar
         for c in self.levelObject.children:
@@ -358,7 +359,7 @@ class KivyKloetze(Widget):
         # play level sound
         levelUpSound = SoundLoader.load('snd/' + str(level) + '.ogg')
         if levelUpSound:
-            print("KivyKloetze::playLevelUpSound::play sound %s" % levelUpSound.source)
+            print("KivyKloetze::levelUp::play sound %s" % levelUpSound.source)
             levelUpSound.play()
 
         # show level up gimmicks
@@ -369,6 +370,7 @@ class KivyKloetze(Widget):
                 levelUpGimmickAni = Animation(opacity=1, duration=1)
                 levelUpGimmickAni.start(c)
 
+    # unload old level and load the next file
     def loadNextLevel(self):
         global level, parts
         if level is not 0:
@@ -398,6 +400,7 @@ class KivyKloetzeApp(App):
     def build(self):
         global game
         game = KivyKloetze()
+        # set correct size
         game.size = Window.size
         print ('KivyKloetzeApp::start')
         game.nextLevel()
