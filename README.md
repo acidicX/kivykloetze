@@ -87,17 +87,24 @@ Now it will get a bit more tricky, we need to define the LevelObject
 which basically contains all object placements and further artwork descriptions.
 
 First, give the level a new background by changing the source line of the rectangle on the canvas of LevelObject:
-> \<LevelObject\>:
+
+```
+\<LevelObject\>:
     canvas:
         Rectangle:
             size: self.size
             source: 'img/6/mynewlevel6background.jpg'
+```
 
 After that, we need to leave the ToolBoxBar element in place (it's the grey transparent bar where all tool shapes lie on):
->    ToolBoxBar:
->        isToolBoxBar: True
+
+```
+    ToolBoxBar:
+        isToolBoxBar: True
+```
 
 Then we add all masks and tools to the canvas.
+
 **Mask properties**:
 * shapeId (required, must be the number of the element, ShapeOne = 1)
 * shapeIsActive (required, must be True)
@@ -115,29 +122,36 @@ Then we add all masks and tools to the canvas.
 Corresponding masks and tools must **always** have the same shapeId!
 In order to add multiple masks and tools of the same class (e.g. ShapeFour and ShapeFourTool in level4.kv), the tools can be stacked inside the toolbox. Therefore, the first tool with
 > shapeToolNo: 1
+
 must be active,
 > shapeIsActive: True
+
 but all following (stacked) tools must be inactive, e.g.
->    ShapeFourTool:
->        shapeId: 4
->        shapeIsActive: False
->        shapeIsTool: True
->        shapeToolNo: 2
+
+```
+ShapeFourTool:
+        shapeId: 4
+        shapeIsActive: False
+        shapeIsTool: True
+        shapeToolNo: 2
+```
 
 If you want to add level up gimmicks (optional), you can just include them after the tools. There is no limit for level up gimmicks. They will be faded in once the level is completed. You can set the size, center and source of all gimmicks.
 
-> LevelUpGimmick:
->        **size**: root.height * 0.2, root.height * 0.2
->        **center**: 0 + root.width * 0.9, root.height * 0.8
->        opacity: 0
->        isGimmick: True
->        canvas:
->            Color:
->                rgb: 1, 1, 1
->            Rectangle:
->                pos: self.pos
->                size: self.size
->                **source**: 'img/4/biene.png'
+```
+ LevelUpGimmick:
+        **size**: root.height * 0.2, root.height * 0.2
+        **center**: 0 + root.width * 0.9, root.height * 0.8
+        opacity: 0
+        isGimmick: True
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                **source**: 'img/4/biene.png'
+```
 
 Last but not least, you can add a level up sound to your level. Just place a soundfile 'levelnumber.ogg' as an [ogg/vorbis](http://www.vorbis.com/) file in the 'snd' directory, e.g. '6.ogg'. **It should not be longer than 5 seconds.**
 
