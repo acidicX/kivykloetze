@@ -89,7 +89,7 @@ which basically contains all object placements and further artwork descriptions.
 First, give the level a new background by changing the source line of the rectangle on the canvas of LevelObject:
 
 ```
-\<LevelObject\>:
+<LevelObject>:
     canvas:
         Rectangle:
             size: self.size
@@ -140,8 +140,8 @@ If you want to add level up gimmicks (optional), you can just include them after
 
 ```
  LevelUpGimmick:
-        **size**: root.height * 0.2, root.height * 0.2
-        **center**: 0 + root.width * 0.9, root.height * 0.8
+        size: root.height * 0.2, root.height * 0.2
+        center: 0 + root.width * 0.9, root.height * 0.8
         opacity: 0
         isGimmick: True
         canvas:
@@ -150,7 +150,7 @@ If you want to add level up gimmicks (optional), you can just include them after
             Rectangle:
                 pos: self.pos
                 size: self.size
-                **source**: 'img/4/biene.png'
+                source: 'img/4/biene.png'
 ```
 
 Last but not least, you can add a level up sound to your level. Just place a soundfile 'levelnumber.ogg' as an [ogg/vorbis](http://www.vorbis.com/) file in the 'snd' directory, e.g. '6.ogg'. **It should not be longer than 5 seconds.**
