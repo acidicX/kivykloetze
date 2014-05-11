@@ -25,7 +25,6 @@ from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, Ref
 from kivy.uix.widget import Widget
 from kivy.vector import Vector
 import os
-import os.path
 
 ''' ---------------------------------------
     Global variables
@@ -163,7 +162,7 @@ class Shape(Widget):
 ''' ---------------------------------------
     < SHAPES >
     ---------------------------------------
-    All four shapes are defined here,
+    All six shapes are defined here,
     but drawn in <lvl/level#.kv> file
     --------------------------------------- '''
 
@@ -367,6 +366,7 @@ class KivyKloetze(Widget):
         if levelUpSound:
             print("KivyKloetze::levelUp::play sound %s" % levelUpSound.source)
             levelUpSound.play()
+            Clock.schedule_once(lambda dt: levelUpSound.stop(), 6)
 
         # show level up gimmicks
         for c in self.levelObject.children:
