@@ -24,6 +24,8 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, ReferenceListProperty, NumericProperty
 from kivy.uix.widget import Widget
 from kivy.vector import Vector
+import os
+import os.path
 
 ''' ---------------------------------------
     Global variables
@@ -35,8 +37,8 @@ game = 0
 level = 0
 # puzze parts to solve in current level
 parts = 0
-# parts in all levels (also defines maximum level count)
-partsArray = [2, 3, 5, 6, 6]
+# maximum level count
+maxLevel = 0
 # contains reference for shape function on_touch_move
 selectedElement = 0
 # contains reference for level up gimmick
@@ -314,13 +316,17 @@ class KivyKloetze(Widget):
 
     # load next level and set up stage
     def nextLevel(self):
-        global level
-        if level is not 0 and level < partsArray.__len__():
+        global level, maxLevel
+        if level is not 0 and level < maxLevel:
             self.levelUp()
             # load next file in 5 seconds
             Clock.schedule_once(lambda dt: game.loadNextLevel(), 5)
 
         if level == 0:
+            # count levels
+            maxLevel = len(os.listdir('lvl'))
+            print('KivyKloetze::nextLevel::levels detected:', maxLevel)
+
             # app start, show splash screen
             self.splashScreen = SplashScreen()
             game.add_widget(self.splashScreen)
@@ -332,7 +338,7 @@ class KivyKloetze(Widget):
             # load first level in 7s
             Clock.schedule_once(lambda dt: game.loadNextLevel(), 7)
 
-        if level == partsArray.__len__():
+        if level == maxLevel:
             self.levelUp()
             # show game finished message and restart in 5 seconds
             self.gameFinishedMessage = GameFinishedMessage()
@@ -391,8 +397,17 @@ class KivyKloetze(Widget):
         self.levelObject = LevelObject()
         game.add_widget(self.levelObject)
 
+        # count parts in new level
+        countParts = 0
+        for c in self.levelObject.children:
+            if hasattr(c, 'shapeIsActive'):
+                if c.shapeIsTool is False:
+                    countParts += 1
+
+        print('KivyKloetze::loadNextLevel::parts count', countParts)
+
         # correct parts count
-        parts = partsArray[level-1]
+        parts = countParts
 
 
 # Startup routine
