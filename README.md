@@ -76,7 +76,7 @@ designing/adding new levels. Due to screen space, visibility and touch restricti
 
 Ok, let's get started. Apart from the level files written in Kivy language, there is no need to modify any actual program code in order to add new levels. We will now explain how to create a new level file by using the included 'level4.kv' file as an example.
 
-At the top of the level#.kv file, the masks and shapes have to be described. In this case, we have four masks (ShapeOne, ShapeTwo, ...) and therefore also four tools (ShapeOneTool, ShapeTwoTool, ...). The only thing you need to define yourself is the artwork - edit the 'source' lines for each shape
+At the top of the level#.kv file, the masks and tools have to be described. In this case, we have four masks (ShapeOne, ShapeTwo, ...) and therefore also four tools (ShapeOneTool, ShapeTwoTool, ...). The only thing you need to define yourself is the artwork - edit the 'source' lines for each shape
 > source: 'img/4/mask_blume1.png'
 
 to match it to your new level artwork, e.g. 'img/6/mask_quad1.png' for a level6.kv file.
@@ -135,6 +135,12 @@ ShapeFourTool:
         shapeIsTool: True
         shapeToolNo: 2
 ```
+
+The positioning is done by changing the center. As we wish to run this game on all kinds of devices, there is no absolute positioning. It is calculated by taking a percentage of the height and width of the device.
+An element with
+> center: 0 + root.width * 0.5, root.height * 0.5
+
+would be right in the middle of the game canvas. You only need to remember that all shapes are by default square, with 20% of the height of the device (root.height * 0.2). Your images therefore also have to be squares, but you can add any forms you like by using a transparent border inside the image (png/gif files only).
 
 If you want to add level up gimmicks (optional), you can just include them after the tools. There is no limit for level up gimmicks. They will be faded in once the level is completed. You can set the size, center and source of all gimmicks.
 
