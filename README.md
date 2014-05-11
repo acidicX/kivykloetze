@@ -88,14 +88,10 @@ which basically contains all object placements and further artwork descriptions.
 
 First, give the level a new background by changing the source line of the rectangle on the canvas of LevelObject:
 > \<LevelObject\>:
-
->    canvas:
-
->        Rectangle:
-
->            size: self.size
-
->            source: 'img/6/mynewlevel6background.jpg'
+    canvas:
+        Rectangle:
+            size: self.size
+            source: 'img/6/mynewlevel6background.jpg'
 
 After that, we need to leave the ToolBoxBar element in place (it's the grey transparent bar where all tool shapes lie on):
 >    ToolBoxBar:
