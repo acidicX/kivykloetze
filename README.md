@@ -1,6 +1,5 @@
 #KivyKlötze
-=============
-by [Carsten](https://github.com/acidicX) ([Web](http://condime.de)) and Sina
+by [Carsten](https://github.com/acidicX) ([web profile](http://condime.de/cm)) and Sina
 
 Licensed under GPL v3
 
@@ -9,7 +8,7 @@ https://www.gnu.org/licenses/gpl.html
 For the audio sources and respective licenses, see snd/sources.md
 
 =============
-##A small game for small children
+###A small game for small children
 
 This game was created for the Kivy App Contest 2014.
 
@@ -39,7 +38,7 @@ Just put all the contents into:
 
 > /storage/sdcard0/kivy/KivyKloetze/
 
-Note that audio files did not play on our Android test device (HTC Desire X, Android 4.1 with Kivy Launcher). This could be another Kivy issue since it works fine on linux and Windows.
+Note that audio files did not play on our Android test device (HTC Desire X, Android 4.1 with Kivy Launcher). This could be another Kivy issue since audio works fine on linux and Windows.
 
 =============
 ###How to add new levels
@@ -72,5 +71,11 @@ We strongly recommend to stick with six tough. Otherwise you would have to decre
 Ok, let's get started. Apart from the level files written in kivy language, there is no need to modify any actual program code.
 
 **Objects inside a level file**
+
+* Masks (= Shapes, up to 6)
+* Tools (= Shapes, up to 6)
+* Level Object with Background (1x)
+* Toolbox Bar (1x)
+* Level Up Gimmicks (unlimited)
 
 TODO
