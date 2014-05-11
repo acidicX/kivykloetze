@@ -77,18 +77,24 @@ designing/adding new levels. Due to screen space, visibility and touch restricti
 Ok, let's get started. Apart from the level files written in Kivy language, there is no need to modify any actual program code in order to add new levels. We will now explain how to create a new level file by using the included 'level4.kv' file as an example.
 
 At the top of the level#.kv file, the masks and shapes have to be described. In this case, we have four masks (ShapeOne, ShapeTwo, ...) and therefore also four tools (ShapeOneTool, ShapeTwoTool, ...). The only thing you need to define yourself is the artwork - edit the 'source' lines for each shape
-> source: 'img/4/mask_blume1.png' <
+> source: 'img/4/mask_blume1.png'
+
 to match it to your new level artwork, e.g. 'img/6/mask_quad1.png' for a level6.kv file.
 
 Now it will get a bit more tricky, we need to define the LevelObject
-> \<LevelObject\>: <
+> \<LevelObject\>:
+
 which basically contains all object placements and further artwork descriptions.
 
 First, give the level a new background by changing the source line of the rectangle on the canvas of LevelObject:
-> <LevelObject>:
+> \<LevelObject\>:
+
 >    canvas:
+
 >        Rectangle:
+
 >            size: self.size
+
 >            source: 'img/6/mynewlevel6background.jpg'
 
 After that, we need to leave the ToolBoxBar element in place (it's the grey transparent bar where all tool shapes lie on):
