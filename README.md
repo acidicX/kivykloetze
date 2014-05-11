@@ -57,7 +57,7 @@ The game consists of required and optional files.
 
 All **level** files are written in [Kivy language](http://kivy.org/docs/api-kivy.lang.html) and stored in the 'lvl' directory. They are numbered consecutively - level1.kv, level2.kv ...
 
-All **artwork** is stored in the 'img' directory, followed by the level number subdirectory. The background for the first level ist stored in 'img/1/bg.jpg', for example. Artwork can be in all formats Kivy can handle.
+All **artwork** is stored in the 'img' directory, followed by the level number subdirectory. The background for the first level is stored in 'img/1/bg.jpg', for example. Artwork can be in all formats Kivy can handle, but since we often need transparency/alpha channel, sticking to png or gif images is recommended.
 
 All **sounds** (level up sounds) are stored in the 'snd' directory. They need to be ogg/vorbis files and have to be named 'levelnumber.ogg' - so for the first level, the filename should be '1.ogg'.
 
@@ -120,6 +120,7 @@ Then we add all masks and tools to the canvas.
 * center (required, positioning of the mask on the canvas)
 
 Corresponding masks and tools must **always** have the same shapeId!
+
 In order to add multiple masks and tools of the same class (e.g. ShapeFour and ShapeFourTool in level4.kv), the tools can be stacked inside the toolbox. Therefore, the first tool with
 > shapeToolNo: 1
 
